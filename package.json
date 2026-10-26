@@ -1,0 +1,15 @@
+{
+  "name": "patchbook-web",
+  "private": true,
+  "description": "Patchbook to SVG in the browser",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "node test/parity.mjs && node test/render.mjs",
+    "vendor": "node tools/vendor.mjs",
+    "serve": "python -m http.server 8000"
+  },
+  "devDependencies": {
+    "@d2lang/d2": "0.1.34"
+  }
+}

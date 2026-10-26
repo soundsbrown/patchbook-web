@@ -1,0 +1,6 @@
+# Store and check out text with LF endings, whatever core.autocrlf says.
+* text=auto eol=lf
+
+# Byte-exact files: a fixture that tests CRLF input, and D2.js as published.
+test/fixtures/crlf.pb -text
+vendor/d2/** -text

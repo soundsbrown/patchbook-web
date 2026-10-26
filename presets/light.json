@@ -1,0 +1,24 @@
+{
+  "name": "Light",
+  "theme": 0,
+  "palette": {
+    "bright": "#1a1a1a",
+    "text": "#2e2e2e",
+    "muted": "#5c5c5c",
+    "dim": "#858585",
+    "border-strong": "#b8b8b8",
+    "border": "#d9d9d9",
+    "bg": "#ffffff",
+    "bg-raised": "#f4f3f0",
+    "accent": "#3d3d3d"
+  },
+  "cables": {
+    "audio": {"color": "#77726b", "dash": 0},
+    "cv": {"color": "#2e8b3e", "dash": 0},
+    "pitch": {"color": "#1f6fb8", "dash": 0},
+    "gate": {"color": "#c62828", "dash": 4},
+    "trigger": {"color": "#c98a00", "dash": 2},
+    "clock": {"color": "#8e44ad", "dash": 4},
+    "other": {"color": "#5c5c5c", "dash": 0}
+  }
+}

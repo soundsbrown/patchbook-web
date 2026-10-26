@@ -1,0 +1,569 @@
+/* Patchbook Web. System fonts, apart from the title's Righteous (fonts/). */
+
+:root {
+    --bg: #f6f3ef;
+    --bg-raised: #ffffff;
+    --bg-sunken: #ece7e1;
+    --border: #d6cec5;
+    --border-strong: #b3a89c;
+    --text: #2a231e;
+    --muted: #6b5f55;
+    --accent: #b4561d;
+    --accent-text: #ffffff;
+    --error: #b3261e;
+    --warning: #8a5a00;
+    --focus: #1f6fb8;
+
+    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-mono: ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+    --radius: 4px;
+    --gutter: 16px;
+    color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #1d1612;
+        --bg-raised: #2b221b;
+        --bg-sunken: #161110;
+        --border: #3d3027;
+        --border-strong: #54443a;
+        --text: #e2d4c6;
+        --muted: #ab9684;
+        --accent: #ffa86a;
+        --accent-text: #1d1612;
+        --error: #ff8a80;
+        --warning: #f2d45c;
+        --focus: #6fb3ee;
+        color-scheme: dark;
+    }
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 var(--font-body);
+}
+
+a {
+    color: var(--accent);
+}
+
+:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+h1, h2, legend {
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+h2 {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.wrap, .intro, .workspace, .settings, .help, .colophon {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+/* Header: a blank panel between two rack rails, as on the SoundsBrown site
+   (.site-header in site-src/static/style.css). It keeps the site's dark
+   brown in both colour schemes, like a module's front panel. */
+@font-face {
+    font-family: "Righteous";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("fonts/righteous-400.woff2") format("woff2");
+}
+
+.site-header {
+    --sb-hp: 16px;
+    --sb-rail-height: 20px;
+    --sb-rail-holes: radial-gradient(circle at 50% 50%, #0d0a08 0 3.6px, #6b584b 3.6px 4.6px, transparent 4.6px);
+    --sb-rail-flange: linear-gradient(
+        #6b584b 0 1px,
+        #54443a 1px 3px,
+        #00000066 3px 4px,
+        #54443a 4px calc(100% - 4px),
+        #00000066 calc(100% - 4px) calc(100% - 3px),
+        #54443a calc(100% - 3px) calc(100% - 1px),
+        #00000088 calc(100% - 1px));
+    padding-block: var(--sb-rail-height);
+    background:
+        var(--sb-rail-holes) calc(50% + var(--sb-hp) / 2) top / var(--sb-hp) var(--sb-rail-height) repeat-x,
+        var(--sb-rail-flange) top / 100% var(--sb-rail-height) no-repeat,
+        var(--sb-rail-holes) calc(50% + var(--sb-hp) / 2) bottom / var(--sb-hp) var(--sb-rail-height) repeat-x,
+        var(--sb-rail-flange) bottom / 100% var(--sb-rail-height) no-repeat,
+        #2b221b;
+    color: #f7efe7;
+}
+
+.site-header .wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 20px;
+}
+
+.site-header h1 {
+    margin: 0;
+    font: 400 40px/1 "Righteous", var(--font-body);
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.site-nav a {
+    padding: 8px 12px;
+    border: 1px solid #54443a;
+    color: #e2d4c6;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.site-nav a:hover {
+    border-color: #ffa86a;
+    background: #ffa86a;
+    color: #1d1612;
+}
+
+.site-header :focus-visible {
+    outline-color: #ffa86a;
+}
+
+@media (max-width: 560px) {
+    .site-header h1 {
+        font-size: 32px;
+    }
+}
+
+.intro p {
+    max-width: 60ch;
+    margin: 16px 0 0;
+    color: var(--muted);
+}
+
+/* Editor and preview side by side, stacked on narrow screens. */
+.workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: var(--gutter);
+    padding-top: 16px;
+}
+
+@media (max-width: 900px) {
+    .workspace {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    textarea, .preview {
+        min-height: 280px;
+    }
+}
+
+.pane {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.pane-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 40px;
+    margin-bottom: 8px;
+}
+
+.tools, .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+button, select, input[type="number"] {
+    min-height: 32px;
+    padding: 4px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.9rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+    border-color: var(--accent);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+button.primary {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-text);
+    font-weight: 600;
+}
+
+/* Two buttons joined into one control; the pressed one is the current choice. */
+.switch {
+    display: flex;
+}
+
+.switch button {
+    border-radius: 0;
+}
+
+.switch button:first-child {
+    border-radius: var(--radius) 0 0 var(--radius);
+}
+
+.switch button:last-child {
+    margin-left: -1px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.switch button[aria-pressed="true"] {
+    position: relative;
+    background: var(--bg-sunken);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+select {
+    max-width: 100%;
+}
+
+textarea {
+    flex: 1;
+    width: 100%;
+    min-height: 420px;
+    padding: 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+    color: var(--text);
+    font: 14px/1.55 var(--font-mono);
+    tab-size: 4;
+    resize: vertical;
+}
+
+/* Shown while a file is dragged over the page. It ignores the pointer, so
+   the drag events keep reaching the page underneath. */
+.drop-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    padding: var(--gutter);
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    pointer-events: none;
+}
+
+.drop-overlay[hidden] {
+    display: none;
+}
+
+.drop-overlay p {
+    margin: 0;
+    padding: 32px 40px;
+    border: 3px dashed var(--accent);
+    border-radius: 8px;
+    background: var(--bg-raised);
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.messages {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9rem;
+}
+
+.messages li {
+    padding: 2px 0 2px 12px;
+    border-left: 3px solid var(--warning);
+    margin-bottom: 4px;
+}
+
+.messages li.error {
+    border-left-color: var(--error);
+    color: var(--error);
+}
+
+/* The preview shows the diagram on the style's background colour, so a
+   transparent diagram looks as it will on a page of that colour. */
+.preview {
+    position: relative;
+    flex: 1;
+    display: grid;
+    place-items: center;
+    min-height: 420px;
+    padding: 16px;
+    overflow: auto;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--preview-bg, var(--bg-sunken));
+}
+
+.preview img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.preview.actual-size {
+    place-items: start;
+}
+
+.preview.actual-size img {
+    max-width: none;
+}
+
+.preview.busy img {
+    opacity: 0.6;
+    transition: opacity 0.2s 0.15s;
+}
+
+.status {
+    max-width: 40ch;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+    color: var(--muted);
+    text-align: center;
+}
+
+.status.error {
+    color: var(--error);
+}
+
+.summary {
+    min-height: 1.5em;
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* Settings */
+.settings {
+    padding-top: 32px;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: var(--gutter);
+    margin-top: 12px;
+}
+
+fieldset {
+    min-width: 0;
+    margin: 0;
+    padding: 12px 16px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+}
+
+legend {
+    padding: 0 6px;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.hint {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.swatch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+input[type="color"] {
+    flex: none;
+    width: 36px;
+    height: 28px;
+    padding: 0 2px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+    cursor: pointer;
+}
+
+details {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+summary {
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.cables {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    align-items: center;
+    gap: 8px 10px;
+    font-size: 0.9rem;
+}
+
+.cables code {
+    color: var(--muted);
+}
+
+.fonts {
+    display: grid;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.font-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
+}
+
+.font-row .font-name {
+    flex: 1 1 140px;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Help */
+.help {
+    padding-top: 40px;
+}
+
+.help-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 8px 32px;
+    margin-top: 12px;
+}
+
+.help pre {
+    margin: 0;
+    padding: 12px 16px;
+    overflow-x: auto;
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    font: 14px/1.55 var(--font-mono);
+}
+
+.help p {
+    margin: 0 0 12px;
+}
+
+code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+}
+
+table {
+    margin: 0 0 12px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+th, td {
+    padding: 2px 16px 2px 0;
+    text-align: left;
+}
+
+th {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.colophon {
+    margin-top: 40px;
+    padding-top: 16px;
+    padding-bottom: 32px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.colophon p {
+    margin: 0 0 6px;
+}

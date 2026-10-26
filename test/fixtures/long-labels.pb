@@ -1,0 +1,5 @@
+- Quadrature LFO (Output four inverted) >> Dual Filter Section (Cutoff modulation 2)
+- Quadrature LFO (Output one) >> Dual Filter Section (Resonance)
+- Dual Filter Section (Lowpass) -> VCA (In)
+- Dual Filter Section (Bandpass output) -> Stereo Mixer (Channel three left)
+- VCA (Out) -> Stereo Mixer (Ch 1)

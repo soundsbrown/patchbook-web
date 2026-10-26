@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patchbook Web</title>
+<meta name="description" content="Write down a modular synth patch using Patchbook syntax and get a diagram out in SVG or PNG format, in your browser.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="app.css">
+<script type="module" src="src/app.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <h1>Patchbook Web</h1>
+    <nav class="site-nav" aria-label="SoundsBrown">
+      <a href="https://soundsbrown.github.io/">Home</a>
+    </nav>
+  </div>
+</header>
+
+<div class="intro">
+  <p>Write down a modular synth patch using <a href="#syntax">Patchbook</a> syntax and get a diagram out in SVG or PNG
+    format. Everything happens in your browser: nothing you type is uploaded.</p>
+</div>
+
+<main class="workspace">
+  <section class="pane" aria-labelledby="patch-heading">
+    <div class="pane-head">
+      <h2 id="patch-heading">Patch</h2>
+      <div class="tools">
+        <select id="example" aria-label="Load an example">
+          <option value="">Examples…</option>
+        </select>
+        <button type="button" id="open" title="Open a .pb file. You can also drop one anywhere on this page.">Open…</button>
+        <button type="button" id="save">Save</button>
+        <input type="file" id="open-file" accept=".pb,.txt,text/plain" hidden>
+      </div>
+    </div>
+    <textarea id="source" spellcheck="false" autocapitalize="off" autocomplete="off"
+              aria-label="Patchbook text" aria-describedby="messages"
+              placeholder="Type a patch here, or drop a .pb file anywhere on this page."></textarea>
+    <ul id="messages" class="messages" aria-live="polite"></ul>
+  </section>
+
+  <section class="pane" aria-labelledby="diagram-heading">
+    <div class="pane-head">
+      <h2 id="diagram-heading">Diagram</h2>
+      <div class="tools">
+        <div class="switch" role="group" aria-label="Preview size">
+          <button type="button" id="zoom-fit" aria-pressed="true" disabled>Fit</button>
+          <button type="button" id="zoom-actual" aria-pressed="false" disabled>100%</button>
+        </div>
+        <button type="button" id="download-svg" class="primary" disabled>Download SVG</button>
+        <button type="button" id="download-png" disabled>Download PNG</button>
+      </div>
+    </div>
+    <div id="preview" class="preview">
+      <p id="status" class="status">Loading the diagram engine (about 9 MB, only the first time)…</p>
+    </div>
+    <p id="summary" class="summary"></p>
+  </section>
+</main>
+
+<section class="settings" aria-labelledby="settings-heading">
+  <h2 id="settings-heading">Settings</h2>
+  <div class="settings-grid">
+
+    <fieldset>
+      <legend>Layout</legend>
+      <label class="field">Direction
+        <select id="direction">
+          <option value="LR">Automatic (top to bottom from 10 modules)</option>
+          <option value="RT">Left to right</option>
+          <option value="DN">Top to bottom</option>
+        </select>
+      </label>
+      <label class="field">Layout engine
+        <select id="layout">
+          <option value="elk">ELK: straight lines with right angles</option>
+          <option value="dagre">Dagre: curved lines</option>
+        </select>
+      </label>
+      <label class="field">Space around the diagram (pixels)
+        <input type="number" id="pad" min="0" max="200" step="5" value="25">
+      </label>
+      <label class="check"><input type="checkbox" id="transparent" checked>
+        Transparent background</label>
+      <p class="hint">Transparent suits diagrams placed on a web page. Choose your page's
+        background colour below so the text stays readable.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Colours</legend>
+      <label class="field">Style
+        <select id="preset"></select>
+      </label>
+      <div id="palette" class="swatches"></div>
+      <details>
+        <summary>More colours</summary>
+        <p class="hint">D2 uses these for details that Patchbook diagrams rarely show.</p>
+        <div id="palette-more" class="swatches"></div>
+      </details>
+      <div class="row">
+        <button type="button" id="import-style">Import style…</button>
+        <button type="button" id="export-style">Export style</button>
+        <input type="file" id="import-file" accept=".json,application/json" hidden>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Cables</legend>
+      <div id="cables" class="cables"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Fonts</legend>
+      <div id="fonts" class="fonts"></div>
+      <p class="hint">TrueType (.ttf) files. The letters a diagram uses get embedded in its SVG,
+        so check that the font's license allows that (open fonts such as those on Google Fonts do).
+        Parameters always use D2's monospaced font.</p>
+    </fieldset>
+
+  </div>
+</section>
+
+<section class="help" id="syntax" aria-labelledby="syntax-heading">
+  <h2 id="syntax-heading">Patchbook in a nutshell</h2>
+  <div class="help-grid">
+    <div>
+      <pre><code>// A comment, shown under the diagram
+
+VOICE 1:
+- Sequencer (Pitch) p> Oscillator (V/Oct)
+- Sequencer (Gate) g> Envelope (Gate)
+- Oscillator (Saw) -> Filter (In)
+- Envelope >> Filter (Cutoff)
+
+* Oscillator: Wave = Saw | Octave = -1
+* Filter:
+| Cutoff = 30%
+| Resonance = 2 o'clock</code></pre>
+    </div>
+    <div>
+      <p>A <strong>cable</strong> line starts with a dash (<code>-</code>), then the module and output
+        it comes from, the cable type, and the module and input it goes to. The
+        <code>(port)</code> names are optional.</p>
+      <table>
+        <thead><tr><th scope="col">Type</th><th scope="col">Cable</th></tr></thead>
+        <tbody>
+          <tr><td><code>-&gt;</code></td><td>Audio</td></tr>
+          <tr><td><code>&gt;&gt;</code></td><td>CV</td></tr>
+          <tr><td><code>p&gt;</code></td><td>Pitch (1V/oct)</td></tr>
+          <tr><td><code>g&gt;</code></td><td>Gate</td></tr>
+          <tr><td><code>t&gt;</code></td><td>Trigger</td></tr>
+          <tr><td><code>c&gt;</code></td><td>Clock</td></tr>
+        </tbody>
+      </table>
+      <p>A line starting with <code>* Module:</code> gives a module's <strong>settings</strong>,
+        either on the same line with <code>|</code> between them, or one per line
+        starting with <code>|</code>. Put spaces around the <code>=</code>.</p>
+      <p>A line ending in a colon, like <code>VOICE 1:</code>, starts a <strong>voice</strong>.
+        Upper and lower case don't matter in names.</p>
+    </div>
+  </div>
+</section>
+
+<div id="drop-overlay" class="drop-overlay" hidden>
+  <p>Drop the file to open it</p>
+</div>
+
+<footer class="colophon">
+  <p><a href="https://github.com/spektroaudio/Patchbook">Patchbook</a> was created by
+    <a href="http://spektroaudio.com/">Spektro Audio</a>. This page runs a JavaScript version of
+    <a href="https://github.com/soundsbrown/Patchbook">SoundsBrown's fork</a>, which adds
+    <a href="https://d2lang.com">D2</a> diagram output.</p>
+  <p>Made by <a href="https://soundsbrown.github.io/">SoundsBrown</a>.
+    <a href="https://github.com/soundsbrown/patchbook-web">Source code</a> (MIT) ·
+    <a href="THIRD-PARTY-NOTICES.txt">Licenses</a></p>
+</footer>
+
+</body>
+</html>

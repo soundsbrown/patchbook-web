@@ -1,0 +1,24 @@
+{
+  "name": "Dark",
+  "theme": 200,
+  "palette": {
+    "bright": "#f2f2f2",
+    "text": "#d6d6d6",
+    "muted": "#a3a3a3",
+    "dim": "#707070",
+    "border-strong": "#4d4d4d",
+    "border": "#383838",
+    "bg": "#1b1b1b",
+    "bg-raised": "#262626",
+    "accent": "#bdbdbd"
+  },
+  "cables": {
+    "audio": {"color": "#c5c2b8", "dash": 0},
+    "cv": {"color": "#4caf50", "dash": 0},
+    "pitch": {"color": "#64b5f6", "dash": 0},
+    "gate": {"color": "#e57373", "dash": 4},
+    "trigger": {"color": "#ffb74d", "dash": 2},
+    "clock": {"color": "#ce93d8", "dash": 4},
+    "other": {"color": "#a3a3a3", "dash": 0}
+  }
+}

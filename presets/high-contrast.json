@@ -1,0 +1,24 @@
+{
+  "name": "High contrast",
+  "theme": 0,
+  "palette": {
+    "bright": "#000000",
+    "text": "#000000",
+    "muted": "#1f1f1f",
+    "dim": "#3d3d3d",
+    "border-strong": "#000000",
+    "border": "#000000",
+    "bg": "#ffffff",
+    "bg-raised": "#ffffff",
+    "accent": "#000000"
+  },
+  "cables": {
+    "audio": {"color": "#000000", "dash": 0},
+    "cv": {"color": "#006b1b", "dash": 0},
+    "pitch": {"color": "#0041a8", "dash": 0},
+    "gate": {"color": "#b00000", "dash": 4},
+    "trigger": {"color": "#7a4f00", "dash": 2},
+    "clock": {"color": "#5e1791", "dash": 6},
+    "other": {"color": "#3d3d3d", "dash": 0}
+  }
+}

@@ -1,0 +1,62 @@
+Third-party software in Patchbook to SVG
+========================================
+
+This page's own code is under the MIT License (LICENSE). It includes or is
+based on the following.
+
+
+Patchbook
+---------
+
+src/patchbook.js is a JavaScript port of patchbook.py from the SoundsBrown
+fork of Patchbook (https://github.com/soundsbrown/Patchbook), which is based
+on PatchBook by Spektro Audio (https://github.com/spektroaudio/Patchbook).
+The examples in examples/ other than cable-types.pb come from the same
+project.
+
+MIT License
+
+Copyright (c) 2017 Spektro Audio
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+D2 and D2.js
+------------
+
+vendor/d2/d2.js is D2.js, the WebAssembly build of D2 (https://d2lang.com),
+unmodified. It is licensed under the Mozilla Public License 2.0; the full
+text is in vendor/d2/LICENSE.txt, and vendor/d2/README.md says which
+version it is and where its source code is.
+
+D2 includes code and fonts by others, such as Go ports of Dagre (MIT) and
+the Eclipse Layout Kernel (Eclipse Public License 2.0). Their notices and
+licenses are in vendor/d2/THIRD_PARTY_NOTICES.txt.
+
+Diagrams made with this page embed the parts of the fonts they use: D2's
+Source Sans Pro and Source Code Pro by Adobe (SIL Open Font License 1.1), or
+the fonts you choose.
+
+
+Righteous
+---------
+
+The page's title is set in Righteous by Astigmatic (fonts/righteous-400.woff2,
+the Latin subset from Fontsource 5.3.0). It is licensed under the SIL Open
+Font License 1.1; the full text is in fonts/OFL-righteous.txt.

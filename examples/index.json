@@ -1,0 +1,6 @@
+[
+  {"file": "cable-types.pb", "title": "Cable types"},
+  {"file": "patch1.pb", "title": "Patchbook example 1"},
+  {"file": "patch2.pb", "title": "Patchbook example 2"},
+  {"file": "syncpll.pb", "title": "Sync PLL"}
+]

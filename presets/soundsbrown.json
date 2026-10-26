@@ -1,0 +1,24 @@
+{
+  "name": "SoundsBrown",
+  "theme": 200,
+  "palette": {
+    "bright": "#f7efe7",
+    "text": "#e2d4c6",
+    "muted": "#ab9684",
+    "dim": "#7d6a5c",
+    "border-strong": "#54443a",
+    "border": "#3d3027",
+    "bg": "#1d1612",
+    "bg-raised": "#2b221b",
+    "accent": "#ffa86a"
+  },
+  "cables": {
+    "audio": {"color": "#b5afa9", "dash": 0},
+    "cv": {"color": "#8cc56a", "dash": 0},
+    "pitch": {"color": "#6fb3ee", "dash": 0},
+    "gate": {"color": "#f07470", "dash": 4},
+    "trigger": {"color": "#f2d45c", "dash": 2},
+    "clock": {"color": "#c79be8", "dash": 4},
+    "other": {"color": "#ab9684", "dash": 0}
+  }
+}
