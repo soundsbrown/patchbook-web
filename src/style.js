@@ -26,16 +26,16 @@ export const CABLE_TYPES = {
 };
 export const CABLE_NAMES = Object.values(CABLE_TYPES);
 
-// The only layouts offered. TALA is never passed to D2: it's proprietary and
-// watermarks its output.
-export const LAYOUTS = ["elk", "dagre"];
+// The only layouts offered. TALA is open source and bundled since D2 0.9.0;
+// older builds watermark its output, which checkSvg refuses to show.
+export const LAYOUTS = ["elk", "dagre", "tala"];
 export const WATERMARK = "UNLICENSED COPY";
 
 const HEX_RE = /^#[0-9a-f]{6}$/i;
 const STROKE_RE = /style\.stroke: "([^"]+)"/g;
 const BACKGROUND = "style: {\n  fill: transparent\n}\n";
 // Port names go into the D2 code unquoted, so a patch could smuggle in D2
-// settings of its own, such as layout-engine: tala.
+// settings of its own, such as a layout-engine the page doesn't offer.
 const LAYOUT_VAR_RE = /d2-config|layout-engine/;
 
 export class StyleError extends Error {}

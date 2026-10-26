@@ -12,7 +12,7 @@ in `vendor/d2/`.
 | --- | --- |
 | `index.html`, `app.css`, `src/app.js` | The page |
 | `src/patchbook.js` | JavaScript port of `patchbook.py` from the [SoundsBrown fork](https://github.com/soundsbrown/Patchbook): parser and D2 output |
-| `src/style.js` | Applies a style: theme colours, cable colours and dashes. Also the TALA guards |
+| `src/style.js` | Applies a style: theme colours, cable colours and dashes. Also the layout guards |
 | `src/render.js` | D2 → SVG, with room made for port labels under ELK |
 | `presets/` | Built-in styles. `index.json` lists them in menu order |
 | `examples/` | Example patches. `index.json` lists them |
@@ -33,7 +33,7 @@ npm test
   can be passed: `node test/parity.mjs path/to/patches`.
 - `test/render.mjs` renders every fixture and example with every preset and
   layout into `test/out/`. It fails on D2 errors, on watermarks and on gaps in
-  the TALA guards.
+  the layout guards.
 
 Parser changes go into the Python fork first, then get ported here. The
 parity test keeps the two in step.
@@ -56,5 +56,5 @@ The page can export and import styles in this format.
 
 MIT for this page's code (`LICENSE`). Patchbook (MIT, Spektro Audio) and D2
 (MPL-2.0) are covered in `THIRD-PARTY-NOTICES.txt`, as is the title font,
-Righteous (OFL, `fonts/OFL-righteous.txt`). TALA, D2's proprietary
-layout engine, is never offered or used.
+Righteous (OFL, `fonts/OFL-righteous.txt`). D2's TALA layout engine is
+part of D2.js under the same license since D2 0.9.0.

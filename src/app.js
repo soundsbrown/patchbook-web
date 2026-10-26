@@ -3,7 +3,7 @@
 
 import {PatchbookError, parsePatchbook, toD2} from "./patchbook.js";
 import {renderSvg} from "./render.js";
-import {CABLE_NAMES, StyleError, checkStyle, d2Options, styleD2} from "./style.js";
+import {CABLE_NAMES, LAYOUTS, StyleError, checkStyle, d2Options, styleD2} from "./style.js";
 
 const $ = id => document.getElementById(id);
 
@@ -390,7 +390,7 @@ function restoreOptions() {
     }
     const options = state.options;
     if (["LR", "RT", "DN"].includes(saved.direction)) options.direction = saved.direction;
-    if (["elk", "dagre"].includes(saved.layout)) options.layout = saved.layout;
+    if (LAYOUTS.includes(saved.layout)) options.layout = saved.layout;
     if (Number.isInteger(saved.pad) && saved.pad >= 0 && saved.pad <= 200) options.pad = saved.pad;
     if (typeof saved.transparent === "boolean") options.transparent = saved.transparent;
 }

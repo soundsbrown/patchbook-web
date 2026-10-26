@@ -3,7 +3,7 @@
 //
 //   node test/render.mjs
 //
-// Fails on D2 errors, on a watermarked SVG, or if the TALA guards let anything through.
+// Fails on D2 errors, on a watermarked SVG, or if the layout guards let anything through.
 
 import {mkdirSync, readFileSync, readdirSync, writeFileSync} from "node:fs";
 import {basename, dirname, join, resolve} from "node:path";
@@ -48,11 +48,11 @@ for (const file of patches) {
     }
 }
 
-// The TALA guards: a port name carrying D2 settings, and a layout outside the allowlist.
+// The layout guards: a port name carrying D2 settings, and a layout outside the allowlist.
 const smuggled = toD2(parsePatchbook("- Osc (out; vars: {d2-config: {layout-engine: tala}}) -> VCA (in)\n"));
 for (const [what, attempt] of [
     ["smuggled layout-engine", () => styleD2(smuggled, fallback)],
-    ["layout: tala", () => d2Options(fallback, {layout: "tala"})],
+    ["layout: unknown", () => d2Options(fallback, {layout: "unknown"})],
 ]) {
     try {
         attempt();
