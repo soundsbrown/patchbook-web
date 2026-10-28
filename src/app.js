@@ -48,6 +48,7 @@ const state = {
 
 let d2 = null;
 let renderToken = 0;
+let diagramUrl = null;  // the blob: URL of the diagram in the preview
 let renderTimer = 0;
 
 // localStorage can be missing or blocked; the page works without it.
@@ -175,12 +176,14 @@ async function render() {
         if (token !== renderToken) {
             return;  // a newer render has started
         }
-        const url = URL.createObjectURL(new Blob([svg], {type: "image/svg+xml"}));
-        const img = element("img", {src: url, alt: `Diagram of the patch: ${[...patch.modules.keys()].join(", ")}`});
-        img.addEventListener("load", () => {
-            URL.revokeObjectURL(url);
-            showSummary();
-        }, {once: true});
+        // The URL stays valid until the next diagram replaces this one, so the
+        // browser's "Open image in new tab" and "Save image as" keep working.
+        if (diagramUrl) {
+            URL.revokeObjectURL(diagramUrl);
+        }
+        diagramUrl = URL.createObjectURL(new Blob([svg], {type: "image/svg+xml"}));
+        const img = element("img", {src: diagramUrl, alt: `Diagram of the patch: ${[...patch.modules.keys()].join(", ")}`});
+        img.addEventListener("load", showSummary, {once: true});
         $("preview").replaceChildren(img);
         setDiagram(svg, d2Text);
     } catch (error) {
