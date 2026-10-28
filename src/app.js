@@ -2,7 +2,7 @@
 // patchbook.js and style.js; D2.js (vendor/d2) draws the diagram in a web worker.
 
 import {PatchbookError, parsePatchbook, toD2} from "./patchbook.js";
-import {renderSvg} from "./render.js";
+import {d2ErrorMessage, renderSvg} from "./render.js";
 import {CABLE_NAMES, LAYOUTS, StyleError, checkStyle, d2Options, styleD2} from "./style.js";
 
 const $ = id => document.getElementById(id);
@@ -196,15 +196,6 @@ async function render() {
         if (token === renderToken) {
             $("preview").classList.remove("busy");
         }
-    }
-}
-
-// D2.js reports compile errors as a JSON list of {range, errmsg}.
-function d2ErrorMessage(error) {
-    try {
-        return JSON.parse(error.message).map(e => e.errmsg).join("; ");
-    } catch {
-        return error.message;
     }
 }
 

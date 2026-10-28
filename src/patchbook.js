@@ -2,7 +2,8 @@
 // fork (https://github.com/soundsbrown/Patchbook), which is based on PatchBook
 // by Spektro Audio (MIT). Same names and the same output as the Python version:
 // toD2(parsePatchbook(text)) prints exactly what `patchbook.py -d2` prints, and
-// test/parity.mjs checks that. Fix parser bugs in the fork first, then here.
+// test/parity.mjs checks that. This is the main version now: fix parser bugs
+// here first, then port the fix to the fork.
 //
 // Differences: modules, ports and parameters are Maps (plain objects would
 // reorder number-like keys), and input that makes the Python script crash

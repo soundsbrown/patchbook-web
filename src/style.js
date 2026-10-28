@@ -1,5 +1,5 @@
-// Diagram styling: turns Patchbook's D2 code into a themed diagram. Ported
-// from site-tools/sbtools/site_diagrams.py in the SoundsBrown site tools.
+// Diagram styling: turns Patchbook's D2 code into a themed diagram, for the
+// page and the command line (bin/patchbook-web.mjs).
 //
 // A style (presets/*.json, or exported from the page) is
 //   {name, theme, palette: {bright, text, ..., accent}, cables: {audio: {color, dash}, ...}}
@@ -103,6 +103,15 @@ export function styleD2(d2Text, style, {transparent = true} = {}) {
         styled = styled.replace(BACKGROUND, `style: {\n  fill: "${style.palette.bg}"\n}\n`);
     }
     return themePrelude(style.palette) + styled;
+}
+
+// Hand-written D2 code with the style's palette: cables and background are
+// left as the code sets them.
+export function themeD2(d2Text, style) {
+    if (LAYOUT_VAR_RE.test(d2Text)) {
+        throw new StyleError("The D2 code tries to set D2's layout engine, which isn't allowed.");
+    }
+    return themePrelude(style.palette) + d2Text;
 }
 
 // D2.js compile/render options. fonts is {fontRegular, fontBold, ...} as Uint8Arrays, or {}.

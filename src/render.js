@@ -2,8 +2,8 @@
 //
 // Port labels sit at either end of a cable. When a diagram flows left to
 // right, ELK's default gap between layers is often narrower than the two
-// labels of one cable, and they run into each other. site_diagrams.py widens
-// the gap with d2's --elk-nodeNodeBetweenLayers, which D2.js doesn't offer.
+// labels of one cable, and they run into each other. The d2 command line can
+// widen the gap (--elk-nodeNodeBetweenLayers), but D2.js doesn't offer that.
 // Instead, each crowded cable gets an invisible centre label ("spacer") as
 // wide as the shortfall: ELK makes room for centre labels. The spacer texts,
 // and the gaps D2 masks out of the cables behind them, are then removed from
@@ -67,6 +67,15 @@ function shortfalls(diagram, spacers) {
 
 function removeSpacers(svg) {
     return svg.replace(SPACER_TEXT_RE, "").replace(MASK_HOLE_RE, (match, body) => body.replace(BLACK_RECT_RE, "") + "</mask>");
+}
+
+// D2.js reports compile errors as a JSON list of {range, errmsg}.
+export function d2ErrorMessage(error) {
+    try {
+        return JSON.parse(error.message).map(e => e.errmsg).join("; ");
+    } catch {
+        return error.message;
+    }
 }
 
 // The SVG for some D2 code. options are D2.js compile options (see style.js d2Options).
